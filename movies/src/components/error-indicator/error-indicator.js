@@ -1,17 +1,13 @@
 import React from 'react'
-
-import './error-indicator.css'
-import icon from './wrong.png'
-
-const ErrorIndicator = ({ message }) => {
-  return (
-    <div className="error-indicator">
-      <img src={icon} alt="error icon" />
-      <span className="boom">{message}</span>
-      <span>something has gone terribly wrong</span>
-      <span>(but we already sent slave to fix it)</span>
-    </div>
-  )
-}
-
+import { Alert, Space } from 'antd'
+const ErrorIndicator = ({ message }) => (
+  <Space
+    direction="vertical"
+    style={{
+      width: '100%',
+    }}
+  >
+    <Alert message={message} type="error" />
+  </Space>
+)
 export default ErrorIndicator
