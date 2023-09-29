@@ -15,7 +15,7 @@ img {
 	height: 260;
 }
 
-.move-container {
+.move__container {
 	padding: 20px;
 }
 
@@ -27,17 +27,52 @@ img {
 	line-height: 28px; /* 140% */
 }
 
-.rating {
-	display: inline-flex;
+.raiting {
+	display: flex;
+	align-items: flex-end;
+	font-size: 20px;
+	line-height: 1;
 }
-
-.rating__item {
-	font-size: 30px;
-	color: #dcdcdc;
-	cursor: pointer;
-	transition: .2s;
+.raiting__body {
+	position: relative;
 }
-
-.color {
-	color: #f3da4f;
+.raiting__body::before {
+	content: "★★★★★★★★★★";
+	color: #ebeae8;
+	display: block;
+}
+.rating__active {
+	position: absolute;
+	width: 0%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	overflow: hidden;
+}
+.rating__active::before {
+	content: "★★★★★★★★★★";
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	color: #ffd300;
+}
+.raiting__items {
+	display: flex;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+}
+.raiting__item {
+	flex: 0 0 15%;
+	height: 100%;
+	opacity: 0;
+}
+.raiting__value {
+	font-size: 50%;
+	line-height: 1;
+	padding: 0px 0px 0px 10px;
 }

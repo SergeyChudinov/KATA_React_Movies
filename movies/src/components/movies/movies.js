@@ -35,7 +35,6 @@ export default class Movies extends Component {
     const { loading } = this.state
     const content = !loading ? elements : null
 
-    console.log(this.state.movies)
     return <div className="moves">{content}</div>
   }
 }

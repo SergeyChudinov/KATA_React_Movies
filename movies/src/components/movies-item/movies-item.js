@@ -10,35 +10,42 @@ export default class MoviesItem extends Component {
       overview = overview.slice(0, 180) + '...'
     }
 
-    let voteAverage = Math.round(vote)
-    console.log(voteAverage)
-    let stars = []
-    for (let i = 1; i < 11; i++) {
-      if (i <= voteAverage) {
-        stars.push(
-          <div className="rating__item color" key={i}>
-            ★
-          </div>
-        )
-      } else {
-        stars.push(
-          <div className="rating__item" key={i}>
-            ★
-          </div>
-        )
-      }
+    const style = {
+      width: `${vote / 0.1}%`,
     }
+
+    let stars = (
+      <div className="raiting">
+        <div className="raiting__body">
+          <div className="rating__active" style={style}>
+            <div className="raiting__items">
+              <input type="radio" className="raiting__item" value="1" name="raiting" />
+              <input type="radio" className="raiting__item" value="2" name="raiting" />
+              <input type="radio" className="raiting__item" value="3" name="raiting" />
+              <input type="radio" className="raiting__item" value="4" name="raiting" />
+              <input type="radio" className="raiting__item" value="5" name="raiting" />
+              <input type="radio" className="raiting__item" value="6" name="raiting" />
+              <input type="radio" className="raiting__item" value="7" name="raiting" />
+              <input type="radio" className="raiting__item" value="8" name="raiting" />
+              <input type="radio" className="raiting__item" value="9" name="raiting" />
+              <input type="radio" className="raiting__item" value="10" name="raiting" />
+            </div>
+          </div>
+        </div>
+        <div className="raiting__value">{vote}</div>
+      </div>
+    )
     return (
       <div className="move">
         <img src={url} alt="" />
-        <div className="move-container">
+        <div className="move__container">
           <p className="title">{title}</p>
           <p>{date}</p>
           <p>Action</p>
           <p>Drama</p>
           <p>{overview}</p>
-          <p>{vote}</p>
-          <div className="rating">{stars}</div>
+          {/* <p>{vote}</p> */}
+          {stars}
         </div>
       </div>
     )
