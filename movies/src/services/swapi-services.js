@@ -8,10 +8,13 @@ export default class MovieService {
     },
   }
 
+  url = 'https://api.themoviedb.org/3/movie/popular'
+  urlPart = 'https://image.tmdb.org/t/p/w500/'
+
   async getResource() {
-    const res = await fetch('https://api.themoviedb.org/3/movie/popular', this.options)
+    const res = await fetch(this.url, this.options)
     if (!res.ok) {
-      throw new Error(`Could not fetch , status: ${res.status}`)
+      throw new Error(`Could not fetch ${this.url} , status: ${res.status}`)
     }
     return await res.json()
   }
@@ -29,7 +32,7 @@ export default class MovieService {
       date: person.release_date,
       overview: person.overview,
       vote: person.vote_average,
-      backdropPath: person.backdrop_path,
+      url: this.urlPart + person.backdrop_path,
     }
   }
 }

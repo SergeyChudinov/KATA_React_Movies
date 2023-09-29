@@ -4,8 +4,7 @@ import './movies-item.css'
 
 export default class MoviesItem extends Component {
   render() {
-    let { title, date, overview, vote, backdropPath } = this.props.data
-    const url = 'https://image.tmdb.org/t/p/w500/' + backdropPath
+    let { title, date, overview, vote, url } = this.props.data
     if (overview.length > 180) {
       overview = overview.slice(0, 180) + '...'
     }
