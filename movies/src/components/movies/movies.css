@@ -1,0 +1,4 @@
+.moves {
+	display: flex;
+	flex-wrap: wrap;
+}

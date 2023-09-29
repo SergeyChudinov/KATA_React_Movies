@@ -1,0 +1,43 @@
+.move {
+	display: flex;
+	width: 555px;
+	height: 260px;
+	margin-right: 30px;
+	margin-bottom: 30px;
+}
+
+.move:nth-child(even) {
+	margin-right: 0;
+}
+
+img {
+	width: 240px;
+	height: 260;
+}
+
+.move-container {
+	padding: 20px;
+}
+
+.title {
+	font-family: Inter;
+	font-size: 20px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 28px; /* 140% */
+}
+
+.rating {
+	display: inline-flex;
+}
+
+.rating__item {
+	font-size: 30px;
+	color: #dcdcdc;
+	cursor: pointer;
+	transition: .2s;
+}
+
+.color {
+	color: #f3da4f;
+}
