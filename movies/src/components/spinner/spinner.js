@@ -1,22 +1,8 @@
 import React from 'react'
-
-import './spinner.css'
-
-const Spinner = () => {
-  return (
-    <div className="loadingio-spinner-gear-grlkw2tjudn center">
-      <div className="ldio-kqfe12icm1i">
-        <div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-      </div>
-    </div>
-  )
-}
-
+import { Space, Spin } from 'antd'
+const Spinner = () => (
+  <Space size="middle">
+    <Spin size="large" />
+  </Space>
+)
 export default Spinner
