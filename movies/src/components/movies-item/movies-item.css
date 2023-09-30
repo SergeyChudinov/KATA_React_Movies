@@ -13,11 +13,12 @@
 }
 
 img {
-	width: 240px;
+	width: 183px;
 	height: 281px;
 }
 
 .move__container {
+	width: 372px;
 	padding: 10px 20px;
 }
 

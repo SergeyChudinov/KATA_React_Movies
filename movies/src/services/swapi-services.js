@@ -38,7 +38,7 @@ export default class MovieService {
       title: person.title,
       date: person.release_date,
       overview: person.overview,
-      vote: person.vote_average,
+      vote: person.vote_average.toFixed(1),
       url: this.urlPart + person.poster_path,
     }
   }
