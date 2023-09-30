@@ -9,19 +9,26 @@ export default class MovieService {
   }
 
   url = 'https://api.themoviedb.org/3/movie/popular'
+  searchUrl = 'https://api.themoviedb.org/3/search/movie?query='
   urlPart = 'https://image.tmdb.org/t/p/w500/'
 
-  async getResource() {
-    const res = await fetch(this.url, this.options)
+  async getResource(url) {
+    const res = await fetch(url, this.options)
     if (!res.ok) {
-      throw new Error(`Could not fetch ${this.url} , status: ${res.status}`)
+      throw new Error(`Could not fetch ${url} , status: ${res.status}`)
     }
     return await res.json()
   }
 
   async getAllMovies() {
-    const res = await this.getResource()
-    // console.log(res.results)
+    const res = await this.getResource(this.url)
+    console.log(res.results)
+    return res.results.map(this._transformMovies).slice(0, 10)
+  }
+
+  async searchAllMovies(search) {
+    const res = await this.getResource(`${this.searchUrl}${search}`)
+    console.log(res.results)
     return res.results.map(this._transformMovies).slice(0, 10)
   }
 
@@ -32,7 +39,7 @@ export default class MovieService {
       date: person.release_date,
       overview: person.overview,
       vote: person.vote_average,
-      url: this.urlPart + person.backdrop_path,
+      url: this.urlPart + person.poster_path,
     }
   }
 }

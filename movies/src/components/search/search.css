@@ -1,4 +1,15 @@
 .search {
-  width: 100%;
+  width: 1140px;
+  height: 40px;
   margin-bottom: 30px;
+  border: 1px solid #D9D9D9;
+  border-radius: 5px;
+  padding-left: 12px;
+}
+.search::placeholder {
+  font-family: "Inter Regular", serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+  color: #D9D9D9;
 }
