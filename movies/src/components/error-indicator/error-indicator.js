@@ -1,5 +1,6 @@
 import React from 'react'
 import { Alert, Space } from 'antd'
+
 const ErrorIndicator = ({ message }) => (
   <Space
     direction="vertical"

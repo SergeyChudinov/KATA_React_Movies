@@ -5,6 +5,7 @@
   padding: 0;
   outline: none;
   font-family: "Inter Regular", serif;
+  font-style: normal;
 }
 .app {
   width: 1200px;

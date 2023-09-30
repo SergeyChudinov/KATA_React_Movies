@@ -1,7 +1,9 @@
+import React, { Component } from 'react'
+
 import './search.css'
 
-function Search() {
-  return <input className="search" type="text" />
+export default class Search extends Component {
+  render() {
+    return <input className="search" type="text" onChange={this.props.onTitleChange} placeholder="Type to search..." />
+  }
 }
-
-export default Search
