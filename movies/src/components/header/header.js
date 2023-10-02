@@ -1,8 +1,34 @@
 import React, { Component } from 'react'
 import { Tabs } from 'antd'
 
+import Search from '../search'
+import Movies from '../movies'
+
 export default class Header extends Component {
   tabs = ['Search', 'Rated']
+
+  renderFn = (i) => {
+    const {
+      data: { movies, moviesRated, loading, error },
+      onTitleChange,
+      onVoteChange,
+    } = this.props
+    if (i === 0) {
+      return (
+        <>
+          <Search onTitleChange={onTitleChange} />
+          <Movies data={{ movies, loading, error }} onVoteChange={onVoteChange} />
+        </>
+      )
+    } else {
+      return (
+        <>
+          <Movies data={{ movies: moviesRated, loading, error }} onVoteChange={onVoteChange} />
+        </>
+      )
+    }
+  }
+
   render() {
     return (
       <Tabs
@@ -13,6 +39,7 @@ export default class Header extends Component {
           return {
             label: this.tabs[i],
             key: id,
+            children: this.renderFn(i),
           }
         })}
       />

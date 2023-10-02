@@ -8,8 +8,9 @@ export default class MovieService {
     },
   }
 
-  url = 'https://api.themoviedb.org/3/movie/popular'
+  url = 'https://api.themoviedb.org/3/search/movie?query=return'
   searchUrl = 'https://api.themoviedb.org/3/search/movie?query='
+  genre = 'https://api.themoviedb.org/3/genre/movie/list?language=ru'
   urlPart = 'https://image.tmdb.org/t/p/w500/'
 
   async getResource(url) {
@@ -22,24 +23,30 @@ export default class MovieService {
 
   async getAllMovies() {
     const res = await this.getResource(this.url)
-    console.log(res.results)
+    // console.log(res.results)
     return res.results.map(this._transformMovies).slice(0, 10)
   }
 
   async searchAllMovies(search) {
     const res = await this.getResource(`${this.searchUrl}${search}`)
-    console.log(res.results)
+    // console.log(res.results)
     return res.results.map(this._transformMovies).slice(0, 10)
   }
 
+  async getAllGenre() {
+    const res = await this.getResource(this.genre)
+    // console.log(res)
+    return res
+  }
   _transformMovies = (person) => {
     return {
       id: person.id,
       title: person.title,
       date: person.release_date,
       overview: person.overview,
-      vote: person.vote_average.toFixed(1),
+      vote: 0.0,
       url: this.urlPart + person.poster_path,
+      genre: person.genre_ids,
     }
   }
 }
