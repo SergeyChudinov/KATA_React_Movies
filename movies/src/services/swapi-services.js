@@ -23,19 +23,16 @@ export default class MovieService {
 
   async getAllMovies() {
     const res = await this.getResource(this.url)
-    // console.log(res.results)
     return res.results.map(this._transformMovies).slice(0, 10)
   }
 
   async searchAllMovies(search) {
     const res = await this.getResource(`${this.searchUrl}${search}`)
-    // console.log(res.results)
     return res.results.map(this._transformMovies).slice(0, 10)
   }
 
   async getAllGenre() {
     const res = await this.getResource(this.genre)
-    // console.log(res)
     return res
   }
   _transformMovies = (person) => {

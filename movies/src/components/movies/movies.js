@@ -16,13 +16,13 @@ export default class Movies extends Component {
 
     const errorMessage = error ? <ErrorIndicator message={errMessage} /> : null
     const spinner = loading ? <Spinner /> : null
-    const content = !loading ? elements : null
+    const content = !loading && !error ? elements : null
 
-    if (!movies.length && !loading && !errMessage) {
+    if (!movies.length && !loading && !error) {
       return <div>По вашему запросу нет фильмов</div>
     }
 
-    if (spinner) {
+    if (loading) {
       return <div className="spinner">{spinner}</div>
     }
 

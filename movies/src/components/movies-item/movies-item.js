@@ -5,10 +5,20 @@ import RateComp from '../rateComp'
 import { GenreConsumer } from '../genre-context'
 
 import './movies-item.css'
+import image from './notFound.png'
 
 export default class MoviesItem extends Component {
+  shouldComponentUpdate(nextProps) {
+    return this.props.data.vote !== nextProps.data.vote
+  }
+
   render() {
     let { title, date, overview, vote, url, genre } = this.props.data
+
+    const stub = url.search(/null/)
+    if (stub > -1) {
+      url = image
+    }
 
     let color
     if (vote >= 7) color = '#66E900'
@@ -21,6 +31,10 @@ export default class MoviesItem extends Component {
 
     if (overview.length > 280) {
       overview = overview.slice(0, 280) + '...'
+    }
+
+    if (title.length > 30) {
+      title = title.slice(0, 25) + '...'
     }
 
     date = format(new Date(date), 'MMMM dd, yyyy')

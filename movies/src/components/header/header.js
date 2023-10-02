@@ -7,9 +7,9 @@ import Movies from '../movies'
 export default class Header extends Component {
   tabs = ['Search', 'Rated']
 
-  renderFn = (i) => {
+  childRender = (i) => {
     const {
-      data: { movies, moviesRated, loading, error },
+      data: { movies, moviesRated, loading, error, errMessage },
       onTitleChange,
       onVoteChange,
     } = this.props
@@ -17,13 +17,13 @@ export default class Header extends Component {
       return (
         <>
           <Search onTitleChange={onTitleChange} />
-          <Movies data={{ movies, loading, error }} onVoteChange={onVoteChange} />
+          <Movies data={{ movies, loading, error, errMessage }} onVoteChange={onVoteChange} />
         </>
       )
     } else {
       return (
         <>
-          <Movies data={{ movies: moviesRated, loading, error }} onVoteChange={onVoteChange} />
+          <Movies data={{ movies: moviesRated, loading, error, errMessage }} onVoteChange={onVoteChange} />
         </>
       )
     }
@@ -39,7 +39,7 @@ export default class Header extends Component {
           return {
             label: this.tabs[i],
             key: id,
-            children: this.renderFn(i),
+            children: this.childRender(i),
           }
         })}
       />
