@@ -1,5 +1,10 @@
 .moves {
 	display: flex;
 	flex-wrap: wrap;
+	/* justify-content: center; */
+}
+
+.spinner {
+	display: flex;
 	justify-content: center;
 }

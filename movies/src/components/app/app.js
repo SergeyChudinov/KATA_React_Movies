@@ -1,32 +1,40 @@
 import React, { Component } from 'react'
 import debounce from 'lodash/debounce'
 
-import './app.css'
-
 import MovieService from '../../services/swapi-services'
-import Search from '../search'
-import Movies from '../movies'
 import Header from '../header/header'
+import { GenreProvider } from '../genre-context'
+
+import './app.css'
 
 export default class App extends Component {
   movieService = new MovieService()
 
   state = {
     movies: [],
+    moviesRated: [],
     title: '',
     loading: true,
     error: false,
     errMessage: null,
+    genreList: [],
   }
 
   componentDidMount() {
     this.updateMovies()
+    this.updateGenreList()
   }
 
   onMoviesLoaded = (movies) => {
     this.setState({
       movies,
       loading: false,
+    })
+  }
+
+  onGenreListLoaded = (genreList) => {
+    this.setState({
+      genreList,
     })
   }
 
@@ -58,6 +66,13 @@ export default class App extends Component {
       .catch((e) => this.onError(e.message))
   }
 
+  updateGenreList = () => {
+    this.movieService
+      .getAllGenre()
+      .then(this.onGenreListLoaded)
+      .catch((e) => this.onError(e.message))
+  }
+
   onTitleChange = (e) => {
     this.setState({
       title: e.target.value,
@@ -72,12 +87,36 @@ export default class App extends Component {
     }, 1000)(e)
   }
 
+  addMoviesRated = (movie, id, vote) => {
+    const movieHasVote = this.state.moviesRated.find((el) => el.id === id)
+    if (!movieHasVote) {
+      this.setState((state) => ({
+        moviesRated: [...state.moviesRated, movie],
+      }))
+    } else {
+      this.setState((state) => ({
+        moviesRated: state.moviesRated.map((item) => {
+          if (item.id === id) {
+            return { ...item, vote: vote }
+          }
+          return item
+        }),
+      }))
+    }
+  }
+
+  onVoteChange = (vote, id) => {
+    const movie = this.state.movies.find((el) => el.id === id)
+    movie.vote = vote
+    this.addMoviesRated(movie, id, vote)
+  }
+
   render() {
     return (
       <div className="app">
-        <Header />
-        <Search onTitleChange={this.handleInput} />
-        <Movies data={this.state} />
+        <GenreProvider value={this.state.genreList.genres}>
+          <Header data={this.state} onTitleChange={this.handleInput} onVoteChange={this.onVoteChange} />
+        </GenreProvider>
       </div>
     )
   }
